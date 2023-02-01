@@ -3,9 +3,9 @@ import isEmail from "validator/lib/isEmail";
 
 import { UserData } from "./AllInterfaces";
 
-interface users extends Document, UserData{};
+interface Users extends Document, UserData{};
 
-const userSchema: Schema<users> = new Schema({
+const userSchema: Schema<Users> = new Schema({
     name: {
         type: String,
         required: [true, "Please provide your name"]
@@ -43,6 +43,6 @@ const userSchema: Schema<users> = new Schema({
 }
 );
 
-const userModel = model<users>("Users Collection", userSchema);
+const userModel = model<Users>("Users Collection", userSchema);
 
 export default userModel

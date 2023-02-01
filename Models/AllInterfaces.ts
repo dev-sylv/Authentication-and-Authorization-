@@ -11,4 +11,12 @@ export interface UserData extends Document {
         };
         quantity: number;
     }[];
+};
+
+export interface ProductData extends Document{
+    name: string;
+    price: number;
+    category: string;
+    rating: string;
+    productImage: string;
 }
