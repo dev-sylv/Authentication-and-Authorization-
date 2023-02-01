@@ -6,7 +6,7 @@ import morgan from "morgan";
 
 import { AppError, HttpCode } from "./Utils/AppError";
 
-import { ErrorHandler } from "./Middlewares/ErrorHnadler";
+import { ErrorHandler } from "./Middlewares/ErrorHandler/ErrorHandler";
 
 export const AppConfig = (app: Application) =>{
     app.use(express.json());
