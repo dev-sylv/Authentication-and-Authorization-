@@ -20,11 +20,6 @@ export const validator = (
             })
         ) : next()
     } catch (error) {
-        next(
-            new AppError({
-                httpCode: HttpCode.BAD_REQUEST,
-                message: error,
-            })
-        )
+        console.log(error)
     }
 };

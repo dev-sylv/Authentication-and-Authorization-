@@ -7,6 +7,7 @@ import morgan from "morgan";
 import { AppError, HttpCode } from "./Utils/AppError";
 
 import { ErrorHandler } from "./Middlewares/ErrorHandler/ErrorHandler";
+import route from "./Routers/users.routes";
 
 export const AppConfig = (app: Application) =>{
     app.use(express.json());
@@ -23,6 +24,9 @@ export const AppConfig = (app: Application) =>{
             })
         )
     });
+
+    // Routes configuration:
+    app.use("/api/users", route)
 
     // Errorhandler should be at the bottom of your code
     app.use(ErrorHandler)

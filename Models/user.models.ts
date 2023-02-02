@@ -1,4 +1,4 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, Document } from "mongoose";
 import isEmail from "validator/lib/isEmail";
 
 import { UserData } from "./AllInterfaces";
@@ -28,14 +28,14 @@ const userSchema: Schema<Users> = new Schema({
         required: [true, "Confirm your password"],
         minlength: 6,
     },
-    cart: [
-        {
-            items: {
-                products: Schema.Types.ObjectId,
-                ref: "Products Collection"
-            }
-        }
-    ]
+    // cart: [
+    //     {
+    //         items: {
+    //             products: Schema.Types.ObjectId,
+    //             ref: "Products Collection"
+    //         }
+    //     }
+    // ]
 },
 {
     versionKey: false,
