@@ -6,6 +6,7 @@ import {
 } from "../Middlewares/Validation/UserValidation/UserValidation";
 
 const route = Router();
+
 route.route("/register").post(RegisterValidation, RegisterUsers);
 route.route("/login").post(LoginValidation, login);
 

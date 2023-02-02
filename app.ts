@@ -15,7 +15,9 @@ export const AppConfig = (app: Application) =>{
     app.use(morgan("dev"));
     // app.use(express.urlencoded());
 
-    // Wrong routes:
+    // Routes configuration:
+    app.use("/api/users", route);
+
     app.all("*", (req: Request, res: Response, next: NextFunction) =>{
         next(
             new AppError({
@@ -25,8 +27,6 @@ export const AppConfig = (app: Application) =>{
         )
     });
 
-    // Routes configuration:
-    app.use("/api/users", route)
 
     // Errorhandler should be at the bottom of your code
     app.use(ErrorHandler)
