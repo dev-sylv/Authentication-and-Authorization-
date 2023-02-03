@@ -3,6 +3,7 @@ import { AsyncHandler } from "../Utils/AsyncHandler";
 import userModel from "../Models/user.models";
 import bcrypt from "bcrypt";
 import { AppError, HttpCode } from "../Utils/AppError";
+import { GenerateToken } from "../Middlewares/JsonWebToken/user.auth";
 
 // Register Users:
 export const RegisterUsers = AsyncHandler(
@@ -61,9 +62,14 @@ export const login = AsyncHandler(
         })
       );
 
+      const token = GenerateToken({
+        _id: checkEmailIExist?._id,
+        email: checkEmailIExist?.email
+      })
+
     res.status(200).json({
       message: "SuccessFully Logged In",
-      data: checkEmailIExist,
+      data: checkEmailIExist, token
     });
   }
 );
