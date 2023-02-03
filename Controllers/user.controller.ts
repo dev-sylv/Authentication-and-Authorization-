@@ -63,13 +63,13 @@ export const login = AsyncHandler(
       );
 
       const token = GenerateToken({
-        _id: checkEmailIExist?._id,
-        email: checkEmailIExist?.email
+        _id: checkEmailIExist!._id,
+        email: checkEmailIExist!.email
       })
 
     res.status(200).json({
       message: "SuccessFully Logged In",
-      data: checkEmailIExist, token
+      data: `Welcome ${checkEmailIExist!.name}`, token
     });
   }
 );
