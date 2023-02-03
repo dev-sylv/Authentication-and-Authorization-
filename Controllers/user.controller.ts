@@ -38,6 +38,7 @@ export const RegisterUsers = AsyncHandler(
   }
 );
 
+// users login
 export const login = AsyncHandler(
   async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
@@ -67,9 +68,20 @@ export const login = AsyncHandler(
         email: checkEmailIExist!.email
       })
 
-    res.status(200).json({
+    res.status(HttpCode.CREATED).json({
       message: "SuccessFully Logged In",
       data: `Welcome ${checkEmailIExist!.name}`, token
     });
   }
 );
+
+// Get users:
+export const GetUsers = AsyncHandler(
+  async(req: Request, res: Response, next: NextFunction): Promise<Response> =>{
+    const users = await userModel.find();
+    return res.status(HttpCode.OK).json({
+      message: "Welcome",
+      data: users
+    })
+  }
+)
