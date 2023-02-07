@@ -5,12 +5,12 @@ export interface UserData extends Document {
     email: string;
     password: string;
     confirmPassword: string;
-    cart: {
-        items: {
-            products: Schema.Types.ObjectId;
-        };
-        quantity: number;
-    }[];
+    // cart: {
+    //     items: {
+    //         products: Schema.Types.ObjectId;
+    //     };
+    //     quantity: number;
+    // }[];
     role: string;
 };
 

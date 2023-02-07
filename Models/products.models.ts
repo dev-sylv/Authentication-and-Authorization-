@@ -1,11 +1,11 @@
 
-import { Schema, model } from "mongoose";
+import { Schema, model ,Document } from "mongoose";
 
 import { ProductData } from "./AllInterfaces";
 
 interface Products extends Document, ProductData{};
 
-const ProductSchema: Schema<Products> = new Schema({
+const ProductSchema = new Schema({
     name: {
         type: String,
         required: [true, "Please enter product name"]
@@ -20,7 +20,15 @@ const ProductSchema: Schema<Products> = new Schema({
     },
     category: {
         type: String,
-        required: [true, "Please enter product category e.g Fashion, Food"]
+        required: [true, "Please enter product category e.g Fashion, Food"],
+        enum: [
+            "All",
+            "Electronics",
+            "Books",
+            "Mobile phones",
+            "Fashion wears"
+        ], 
+        message: "Please enter category as supplied : All, Electronics, Books, Mobile phones,Fashion wears"
     },
     rating: {
         type: Number,

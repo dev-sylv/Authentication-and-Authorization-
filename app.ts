@@ -7,7 +7,10 @@ import morgan from "morgan";
 import { AppError, HttpCode } from "./Utils/AppError";
 
 import { ErrorHandler } from "./Middlewares/ErrorHandler/ErrorHandler";
-import route from "./Routers/users.routes";
+
+import userrouter from "./Routers/users.routes";
+
+import productrouter from "./Routers/product.routes";
 
 export const AppConfig = (app: Application) =>{
     app.use(express.json());
@@ -16,7 +19,8 @@ export const AppConfig = (app: Application) =>{
     // app.use(express.urlencoded());
 
     // Routes configuration:
-    app.use("/api/users", route);
+    app.use("/api/users", userrouter);
+    app.use("/api/products", productrouter)
 
     app.all("*", (req: Request, res: Response, next: NextFunction) =>{
         next(

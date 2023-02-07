@@ -5,7 +5,7 @@ import { UserData } from "./AllInterfaces";
 
 interface Users extends Document, UserData{};
 
-const userSchema: Schema<Users> = new Schema({
+const userSchema = new Schema({
     name: {
         type: String,
         required: [true, "Please provide your name"]
@@ -28,6 +28,13 @@ const userSchema: Schema<Users> = new Schema({
         required: [true, "Confirm your password"],
         minlength: 6,
     },
+    role: {
+        type: String,
+        required: true,
+        enum: ["admin", "user", "manager"],
+        message: `Please identify your role as provided: admin, user, manager`,
+        default: "user"
+    }
     // cart: [
     //     {
     //         items: {
