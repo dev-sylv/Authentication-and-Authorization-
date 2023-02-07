@@ -58,6 +58,7 @@ export const UserAuth = (req: Request, res: Response, next: NextFunction) =>{
                 )
             }
             req!.user = verifiedUsers as UserData
+            next()
         } catch (error: any) {
             next(
                 new AppError({
