@@ -22,6 +22,7 @@ const userSchema = new Schema({
         type: String,
         required: [true, "Please enter your password"],
         minlength: 6,
+        alphanum: true
     },
     confirmPassword: {
         type: String,
