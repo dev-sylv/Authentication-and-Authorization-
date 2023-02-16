@@ -1,0 +1,3 @@
+Typegoose is a "wrapper" for easily writing Mongoose models with TypeScript.
+
+Namespaces are a TypeScript-specific way to organize code.

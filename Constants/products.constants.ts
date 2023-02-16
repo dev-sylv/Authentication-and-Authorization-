@@ -1,10 +1,9 @@
-export const category ={
-    all : "all",
-    menswear : "men's wear",
-    womenswear : "women's wear",
-    electronics : "electronics",
-    clothing : "clothing",
-    furniture : "furniture",
-    books : "books",
-    mobile : "mobile",
-}
+export const category = {
+    all: "all",
+    mensWear: "men's wear",
+    womensWear: "women's wear",
+    electronics: "electronics",
+    books: "books",
+    mobilePhone: "mobile phones",
+  };
+  

@@ -1,18 +1,22 @@
 import { Document, Schema } from "mongoose";
 
-export interface UserData extends Document {
+export interface IUser extends Document {
     name: string;
     email: string;
     password: string;
     confirmPassword: string;
-    // cart: {
-    //     items: {
-    //         products: Schema.Types.ObjectId;
-    //     };
+    // cart?: {
+    //   items: {
+    //     productId: Schema.Types.ObjectId;
     //     quantity: number;
+    //   };
     // }[];
     role: string;
-};
+  }
+  
+  export interface IAuthUser extends Request {
+    user: IUser;
+  }
 
 export interface Review{
     user: Schema.Types.ObjectId,

@@ -1,17 +1,25 @@
 import { Request, Response, NextFunction } from "express";
+import { authRole } from "../Constants/users.constants";
+import { IAuthUser, IUser } from "../Models/AllInterfaces";
 import { AppError, HttpCode } from "../Utils/AppError";
 
-export const isAdmin = async(req: AuthUser, res: Response, next: NextFunction) =>{
-    const user = req!.user
-
-    const adminUser = user && user.role === "admin";
+export const isAdmin = (
+    req: Request<{}, {}, IAuthUser>,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const user = req!.user as IUser;
+  
+    const adminUser = user && user.role === authRole.admin;
     if (!adminUser) {
-        next(
-            new AppError({
-                message: "Unauthorized admin ",
-                httpCode : HttpCode.BAD_REQUEST
-            })
-        )
+      next(
+        new AppError({
+          message: "Unauthorized admin user",
+          httpCode: HttpCode.UNAUTHORIZED,
+        })
+      );
     }
-}
+  
+    next();
+  };
 
