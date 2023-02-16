@@ -4,6 +4,7 @@ import userModel from "../Models/user.models";
 import bcrypt from "bcrypt";
 import { AppError, HttpCode } from "../Utils/AppError";
 import { GenerateToken } from "../Middlewares/JsonWebToken/user.auth";
+import { IUser } from "../Models/AllInterfaces";
 
 // Register Users:
 export const RegisterUsers = AsyncHandler(
@@ -40,37 +41,38 @@ export const RegisterUsers = AsyncHandler(
 
 // users login
 export const login = AsyncHandler(
-  async (req: Request, res: Response, next: NextFunction) => {
+  async (
+    req: Request<{}, {}, IUser>,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response> => {
     const { email, password } = req.body;
-    const checkEmailIExist = await userModel.findOne({ email });
-    if (!checkEmailIExist)
+
+    if (!email || !password) {
       next(
         new AppError({
-          message: "User not Found",
-          httpCode: HttpCode.NOT_FOUND,
+          message: "Please provide email and password",
+          httpCode: HttpCode.BAD_REQUEST,
         })
       );
-    const checkPassword = await bcrypt.compare(
-      password,
-      checkEmailIExist!.password
-    );
+    }
 
-    if (!checkPassword)
+    const user = await userModel.findOne({ email });
+    const checkPassword = await bcrypt.compare(password, user!.password);
+
+    if (!checkPassword) {
       next(
         new AppError({
-          message: "User Or Password Not exist",
-          httpCode: HttpCode.NOT_FOUND,
+          message: "Invalid password or email",
+          httpCode: HttpCode.UNAUTHORIZED,
         })
       );
+    }
 
-      const token = GenerateToken({
-        _id: checkEmailIExist!._id,
-        email: checkEmailIExist!.email
-      })
-
-    res.status(HttpCode.CREATED).json({
-      message: "SuccessFully Logged In",
-      data: `Welcome ${checkEmailIExist!.name}`, token
+    const token = GenerateToken({ email: user!.email, _id: user!._id });
+    return res.status(HttpCode.OK).json({
+      message: `${user!.name}, you are welcome`,
+      token,
     });
   }
 );
